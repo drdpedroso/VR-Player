@@ -229,8 +229,13 @@ class VideoPlayerController(
         // Set the format of the source.
         // In our case it will be hls
         // in case of mpd/wvm formats you have to to call mediaSource.setDrmData method as well
-        mediaSource.url = videoUrl.get("videoPath") as String
-        mediaSource.mediaFormat = PKMediaFormat.mp4
+        if (videoUrl.get("videoPath") != null){
+            mediaSource.url = videoUrl.get("videoPath") as String
+            mediaSource.mediaFormat = PKMediaFormat.mp4
+        } else {
+            mediaSource.url = videoUrl.get("videoUrl") as String
+            mediaSource.mediaFormat = PKMediaFormat.mp4
+        }
 
         return listOf(mediaSource)
     }
